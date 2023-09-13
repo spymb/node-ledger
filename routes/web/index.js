@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const AccountModel = require("../models/AccountModel");
+const AccountModel = require("../../models/AccountModel");
 const moment = require("moment");
 
 //记账本的列表
