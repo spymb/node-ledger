@@ -4,7 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-/********************************************************************************************/
+/**************************************以下******************************************************/
 // 数据库连接
 const MongoStore = require("connect-mongo");
 // 配置项
@@ -15,7 +15,10 @@ const session = require("express-session");
 // 页面路由
 const indexRouter = require("./routes/web/index");
 const authRouter = require("./routes/web/auth");
-/*****************************************************************************************************/
+// api 路由
+const authApiRouter = require("./routes/api/auth");
+const accountRouter = require("./routes/api/account");
+/****************************************以上*************************************************************/
 
 var app = express();
 
@@ -29,7 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-/******************************************************************************************/
+/*************************************以下*****************************************************/
 // 设置 session 的中间件
 app.use(
   session({
@@ -50,7 +53,10 @@ app.use(
 // 页面路由
 app.use("/", indexRouter);
 app.use("/", authRouter);
-/**************************************************************************************************/
+// api 路由
+app.use("/api", accountRouter);
+app.use("/api", authApiRouter);
+/********************************************以上******************************************************/
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
