@@ -9,7 +9,7 @@ const UserModel = require("../../models/UserModel");
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
   UserModel.findOne({ username: username, password: md5(password) })
-    .then(() => {
+    .then((data) => {
       if (!data) {
         res.json({
           code: "2002",
